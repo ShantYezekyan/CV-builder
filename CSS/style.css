@@ -1,0 +1,20 @@
+main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px
+    ;
+}
+
+.cv_container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.cv_left {
+    background-color: aqua;
+}
+
+.cv_right {
+    background-color: antiquewhite;
+}
