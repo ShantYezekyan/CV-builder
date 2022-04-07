@@ -5,65 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>CV Builder</title>
 </head>
 <body>
 
     <main>
-        <section>
+        <section class="builder_container">
             <h2>Create CV</h2>
 
-            <form action="" id="form">
-                <input type="text"  name="firstName" placeholder="First Name">
-                <input type="text"  name="lastName" placeholder="Last Name">
-                <label for="male">Male</label>
-                <input type="radio" name="gender" id="male" value="male">
-                <label for="female">Female</label>
-                <input type="radio" name="gender" id="female" value="female">
-                <textarea name="aboutMe" id="" cols="30" rows="10"></textarea>
+            <div>
+                <form action="" id="personalInfoForm">
+                    <input type="text"  name="firstName" placeholder="First Name">
+                    <input type="text"  name="lastName" placeholder="Last Name">
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" id="male" value="male">
+                    <label for="female">Female</label>
+                    <input type="radio" name="gender" id="female" value="female">
+                    <textarea name="aboutMe" id="" cols="30" rows="10"></textarea>
+    
+                    <input type="email"  name="email" placeholder="email">
+                    <input type="number"  name="phoneNumber" placeholder="phone number">
+                    <!-- <label for="viber">Add Viber icon</label>
+                    <input type="checkbox" name="viber" id="viber" value="viber">
+                    <label for="whatsApp">Add WhatsApp icon</label>
+                    <input type="checkbox" name="whatsApp" id="whatsApp" value="whatsApp"> -->
+                    <input type="text"  name="address" placeholder="address">
+                    
+                </form>
+    
+                <hr>
+    
+                <form action="" id="socialForm">
+                    <input type="text" name="facebook" placeholder="fb id">
+                    <input type="text" name="instagram" placeholder="IG id">
+                    <input type="text" name="linkedin" placeholder="Linkedin id">
+                </form>
+            </div>
 
-                <input type="email"  name="email" placeholder="email">
-                <input type="number"  name="phoneNumber" placeholder="phone number">
-                <input type="text"  name="address" placeholder="address">
-                
-            </form>
-
-            <hr>
-
-            <form action="" id="socialForm">
-                <input type="text" name="facebook" placeholder="fb id">
-                <input type="text" name="instagram" placeholder="IG id">
-                <input type="text" name="linkedin" placeholder="Linkedin id">
-            </form>
-
+        
             <hr>
 
             
-
-
-
-            <div id="skillFormSection">
-                
-                
-            </div>
-
+            <div id="skillFormSection"></div>
             <button id="addSkills">Add skill</button>
 
             <hr>
 
-            <div id="workFormSection">
-               
-                 
-            </div>
-
+            <div id="workFormSection"></div>
             <button id="addWork">Add work</button>
             
             <hr>
 
             <button id="testCv">Test Cv</button>
-
-          
-            
 
         </section>
 
@@ -78,26 +72,54 @@
                         <img src="./Images/defualtImg.png" alt="" class="myPhoto" id="myAvatar">
                     </div>
 
-                    <div id="contact_container">
+                    <div id="contact_container" class="left_cont">
                         <h2>Contact Info</h2>
                         <hr>
                         <div id="contactInfo">
+                            <div>
+                                <i class="fa fa-envelope"></i>
+                                <a class="emailInfo">E-mail</a>
+                            </div>
+                            
+                            <div>
+                                <i class="fa fa-phone"></i>
+                                <a class="phoneInfo">Phone Number</a>
+                            </div>
+                            
+                            <div>
+                                <i class="fa fa-home"></i>
+                                <a class="addressInfo">Address</a>
+                            </div>
                             
                         </div>
                                                 
                     </div>
 
-                    <div id="social_container">
+                    <div id="social_container" class="left_cont">
                         <h2>Social Info</h2>
                         <hr>
                         <div id="socialInfo">
+                            <div class="socialData">
+                                <i class="fa fa-facebook-official"></i>
+                                <a class="fb_Id" href="">Facebook ID</a>
+                            </div>
+                            <div class="socialData">
+                                <i class="fa fa-instagram"></i>
+                                <a class="ig_Id" href="">Instagram ID</a>
+                            </div>
+                            <div class="socialData">
+                                <i class="fa fa-linkedin"></i>
+                                <a class="lk_Id" href="">LinkedIn ID</a>
+                            </div>
                             
+                            
+                           
                         </div>
 
                     
                     </div>
 
-                    <div id="skills_container">
+                    <div id="skills_container" class="left_cont">
                         <h2>Skills</h2>
                         <hr>
 
@@ -114,7 +136,7 @@
 
                 <div class="cv_right">
                     <div id="personalInfo">
-                        <h2 class="name_design1" id="fullName">John Doe</h2>
+                        <h2 class="name_design1" id="fullName"></h2>
                         <hr>
                         <div id="aboutMe_container">
                             <h2>About Me</h2>

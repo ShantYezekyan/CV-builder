@@ -1,7 +1,3 @@
-// export const tagSetValue = (tagId, value = '') => {
-//     document.getElementById(tagId).innerHTML = value;
-// }
-
 export const createInputElement = (elToAppend, name, type, placeholder) => {
     const el = document.createElement('input');
     el.setAttribute('name', name);

@@ -5,13 +5,15 @@ import {
     createTagElement,
 } from './helpers.js'
 
+const lorem = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi aut est, recusandae non tempora totam ea maxime'; 
+
 class CreateCVGenerator {
     constructor() {
         this.firstName = '';
         this.lastName = '';
         this.email = '';
         this.address = '';
-        this.phoneNumber = null;
+        this.phoneNumber = '';
         this.aboutMe = '';
         this.gender = '';
         this.social = {
@@ -32,15 +34,6 @@ class CreateCVGenerator {
         this.social[key] = value;
     }
 
-
-    addSkill(key, value) {
-
-    }
-
-    addWork(key, value) {
-
-    }
-
 };
 
 
@@ -50,7 +43,7 @@ const cv = new CreateCVGenerator()
 
 // ------------------------ Add and Render Personal Info----------------------------------
 
-document.getElementById('form').addEventListener('input', (e) => {
+document.getElementById('personalInfoForm').addEventListener('input', (e) => {
     const { value, name } = e.target;
     cv.personalInfoChange(name, value);
     renderPersonalInfo()
@@ -61,18 +54,26 @@ document.getElementById('form').addEventListener('input', (e) => {
         const myImg = document.getElementById('myAvatar');
         myImg.setAttribute('src', './Images/woman.jpg')
     }
-
 })
 
+
 const renderPersonalInfo = () => {
-    document.getElementById('fullName').innerHTML = `${cv.firstName} ${cv.lastName}`;
-    document.getElementById('aboutMe_container').innerHTML = `<p>${cv.aboutMe}</p>`;
-    document.getElementById('contactInfo').innerHTML = `<a href="tel:${cv.phoneNumber}">${cv.phoneNumber}</a>
-   <a href="mailto:${cv.email}">${cv.email}</a>
-   <p>${cv.address}</p>`
+    const fullName = document.getElementById('fullName');
+    const aboutMe = document.getElementById('aboutMe_container')
+    const email = document.querySelector('.emailInfo');
+    const phone = document.querySelector('.phoneInfo');
+    const address = document.querySelector('.addressInfo');
+    
+    
+    cv.firstName === '' && cv.lastName === '' ? fullName.innerText = 'John Doe' : fullName.innerText = cv.firstName + ' ' + cv.lastName;
+    cv.aboutMe === '' ? aboutMe.innerText = lorem : aboutMe.innerText = cv.aboutMe; 
+    cv.address === '' ? address.innerText = 'Address' : address.innerText = cv.address;
+    cv.phoneNumber === '' ? phone.innerText = 'Phone Number' : phone.innerText = cv.phoneNumber, phone.setAttribute('href', `tel:${cv.phoneNumber}`);
+    cv.email === '' ? email.innerText = 'E-mail' : email.innerText = cv.email, email.setAttribute('href', `mailto:${cv.email}`);
+    
 
 }
-
+renderPersonalInfo()
 
 document.getElementById('socialForm').addEventListener('input', (e) => {
     const { value, name } = e.target;
@@ -82,17 +83,20 @@ document.getElementById('socialForm').addEventListener('input', (e) => {
 })
 
 const renderSocial = () => {
+    const fbField = document.querySelector('.fb_Id')
+    const igField = document.querySelector('.ig_Id')
+    const lkField = document.querySelector('.lk_Id')
     const fb = cv.social.facebook;
     const ig = cv.social.instagram;
     const lk = cv.social.linkedin;
-    document.getElementById('socialInfo').innerHTML = `<a href="https://www.facebook.com/${fb}">${fb}</a>
-    <a href="https://www.instagram.com/${ig}">${ig}</a>
-    <a href="https://www.linkedin.com/${lk}">${lk}</a>`;
 
+    fb === '' ? fbField.innerText = 'Facebook ID' : fbField.innerText = fb, fbField.setAttribute('href', `https://www.facebook.com/${fb}`)
+    ig === '' ? igField.innerText = 'Instagram ID' : igField.innerText = ig, igField.setAttribute('href', `https://www.instagram.com/${ig}`)
+    lk === '' ? lkField.innerText = 'LinkedIn ID' : lkField.innerText = ig, lkField.setAttribute('href', `https://www.linkedin.com/${lk}`)
 }
 
 document.getElementById('testCv').onclick = function () {
-    console.log(cv.skills);
+    console.log(cv);
 }
 
 // -----------------------------------------------------------------------------
@@ -100,24 +104,32 @@ document.getElementById('testCv').onclick = function () {
 
 
 const addWorkData = (workId) => {
-
     const workData = cv.work.find(obj => obj.id === workId)
 
     const workBlock = document.getElementById(workId)
-    workBlock.querySelector('.companyName').innerText = workData.title;
-    workBlock.querySelector('.positionName').innerText = workData.position;
-    workBlock.querySelector('.jobTimePeriod').innerText = workData.jobStart + ' - ' + workData.jobEnd;
-    workBlock.querySelector('.workDetails').innerText = workData.jobDetails;
+    const name = workBlock.querySelector('.companyName');
+    const position = workBlock.querySelector('.positionName');
+    const startDate = workBlock.querySelector('.jobStart')
+    const endDate = workBlock.querySelector('.jobEnd')
+    const details = workBlock.querySelector('.workDetails');
+
+    workData.title === '' ? name.innerText = 'Company Name' : name.innerText = workData.title
+    workData.position === '' ? position.innerText = 'Position' : position.innerText = workData.position
+    workData.jobDetails === '' ? details.innerText = lorem : details.innerText = workData.jobDetails
+    workData.jobStart === '' ? startDate.innerText = 'Start Date -' : startDate.innerText = `${workData.jobStart} -`;
+    workData.jobEnd === '' ? endDate.innerText = ' Current' : endDate.innerText = ` ${workData.jobEnd}`;
 }
 
 
 const addSkillData = (skillId) => {
-
     const skillData = cv.skills.find(obj => obj.id === skillId)
 
     const skillBlock = document.getElementById(skillId)
-    skillBlock.querySelector('.skillName').innerText = skillData.skillName;
-    skillBlock.querySelector('.skillBar_Fill').style.width = skillData.level + '%';
+    const name = skillBlock.querySelector('.skillName');
+    const level = skillBlock.querySelector('.skillBar_Fill')
+    skillData.skillName === '' ? name.innerText = 'Your Skill' : name.innerText = skillData.skillName
+    skillData.level === '' ? level.style.width = '50%' : level.style.width = skillData.level + '%'
+
 }
 
 
@@ -131,8 +143,7 @@ const cvEventListener = (cvKey, newId, renderData) => (e) => {
 
         return cvValue;
     })
-
-    
+ 
     
     if (renderData === 'addWork') {
         addWorkData(newId);
@@ -147,11 +158,14 @@ const createWorkBlock = (id) => {
     const container = document.getElementById('work_container')
     const workBlock = createTagElement('div', 'workBlock', container);
     workBlock.setAttribute('id', id)
-    const header = createTagElement('div', 'workBlockTitle', workBlock);
-    const companyName = createTagElement('h3', 'companyName', header, 'test')
-    const positionName = createTagElement('h4', 'positionName', header)
-    const jobTimePeriod = createTagElement('p', 'jobTimePeriod', header)
-    const workDetauls = createTagElement('p', 'workDetails', workBlock)
+    const workBlockHeader = createTagElement('div', 'workBlockTitle', workBlock);
+    const workNamePosition = createTagElement('div', 'compName-Position', workBlockHeader)
+    createTagElement('h3', 'companyName', workNamePosition, 'Company Name')
+    createTagElement('h4', 'positionName', workNamePosition, 'Position')
+    const timePeriod = createTagElement('div', 'jobTimePeriod', workBlockHeader)
+    createTagElement('span', 'jobStart', timePeriod, 'Start Date -')
+    createTagElement('span', 'jobEnd', timePeriod, ' Current')
+    createTagElement('p', 'workDetails', workBlock, lorem)
 }
 
 const renderWork = function () {
@@ -164,7 +178,14 @@ const renderWork = function () {
     document.getElementById('workFormSection').appendChild(element)
 
     const newId = Math.random().toString()
-    const newWork = { id: newId }
+    const newWork = { 
+                        id: newId,
+                        title: '',
+                        position: '',
+                        jobStart: '',
+                        jobEnd: '',  
+                        jobDetails: ''
+                    }
     cv.work.push(newWork)
 
 
@@ -190,7 +211,7 @@ const createSkillBlock = (id) => {
     const container = document.getElementById('skills_container');
     const skillBlock = createTagElement('div', 'skillBlock', container);
     skillBlock.setAttribute('id', id)
-    createTagElement('h3', 'skillName', skillBlock);
+    createTagElement('h3', 'skillName', skillBlock, 'Your Skill');
     const skillBar = createTagElement('div', 'skillBar', skillBlock);
     createTagElement('div', 'skillBar_Fill', skillBar);
 }
@@ -204,18 +225,22 @@ const renderSkill = () => {
     document.getElementById('skillFormSection').appendChild(element)
 
     const newId = Math.random().toString()
-    const newSkill = { id: newId }
-    cv.skills.push(newSkill)
+    const newSkill = { 
+                        id: newId,
+                        skillName: '',
+                        level: 50 
+                    };
+    cv.skills.push(newSkill);
 
-    element.addEventListener('input', cvEventListener('skills', newId, 'addSkill'))
+    element.addEventListener('input', cvEventListener('skills', newId, 'addSkill'));
     
-    createSkillBlock(newId)
+    createSkillBlock(newId);
 }
 
-renderSkill()
+renderSkill();
 
 
-document.getElementById('addSkills').onclick = renderSkill
+document.getElementById('addSkills').onclick = renderSkill;
 
 
 
@@ -235,5 +260,3 @@ document.getElementById('addSkills').onclick = renderSkill
             
 //         // };
 
-
-// document.querySelector('.skillBar_Fill').style.width = '60%'

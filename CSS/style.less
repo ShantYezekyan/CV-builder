@@ -3,13 +3,18 @@ main {
   grid-template-columns: repeat(2, 1fr);
   gap: 20px; 
 }
+
+h3, h4 {
+  margin: 0;
+}
+
 .cv_container {
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
 .cv_left {
-  background-color: aqua;
+  background-color: rgb(209, 193, 246);
 }
 .img_container {
   margin: 20px auto auto;
@@ -24,16 +29,14 @@ main {
   border-radius: 50%;
 }
 .cv_right {
-  background-color: antiquewhite;
+  background-color: rgb(249, 244, 237);
 }
 .name_design1 {
   text-align: center;
   font-size: 40px;
   margin-bottom: 15px;
 }
-#personalInfo > hr {
-  width: 80%;
-}
+
 
 input {
     display: block;
@@ -50,40 +53,74 @@ input {
   grid-template-columns: auto;
 }
 
-#aboutMe_container {
-  margin: 5px;
-  border: solid 1px blueviolet;
-}
+
 
 .cv_right {
   padding: 10px;
 }
 
-#work_container {
-  border: 1px solid red;
+.workBlock {
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
+
 
 .workBlockTitle {
   display: flex;
   justify-content: space-between;
+  
+  h4 {
+    left: 0;
+  }
 }
 
-.workBlock {
-  border: 2px solid greenyellow;
-}
+
 
 .skillBar {
   display: block;
-  width: auto;
+  width: 80%;
   background-color: white;
-  margin-left: 20px;
-  margin-right: 20px;
-  height: 4px;
+  // height: 4px;
 }
 
 .skillBar_Fill {
   display: block;
-  background-color: green;
-  width: 0;
+  background-color: rgb(65, 9, 144);
+  width: 50%;
   height: 4px;
+}
+
+#contactInfo > div > p {
+    display: inline;
+}
+
+.left_cont {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.skillBlock {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.skillName {
+  margin-bottom: 5px;
+}
+~
+.socialData > a {
+  text-decoration: none;
+
+}
+
+.fb_Id {
+  color: #3B5998;
+}
+
+.ig_Id {
+  color: #DD2A7B;
+}
+
+.lk_Id {
+  color: #0E76A8;
 }
